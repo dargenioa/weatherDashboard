@@ -1,9 +1,30 @@
 $( document ).ready(function() {
+    
+    let searchCity = $("#search-city");
+    let searchZipcode = $("search-zipcode");
+    let searchHistoryEl = $("search-history");
+    let historyArr = [];
+    
     var appID = "cac4580de451da1962896497423d0dd0";
+
+    function renderSearchHistory () {
+            $(".history").empty();
+
+            for (let i = 0; i < historyArr.length; i++) {
+              let newBtn  = $("<button>").text(historyArr[i]);
+              let newDiv = $("<div>");
+              newDiv.append(newBtn);
+              $(".history").prepend(newDiv);
+
+            }
+          };
+
 
     $(".query_btn").click(function(){
 
         var query_param = $(this).prev().val();
+        historyArr.push(query_param);
+
 
         if ($(this).prev().attr("placeholder") == "City") {
             var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
@@ -19,7 +40,11 @@ $( document ).ready(function() {
             $("#temperature").html((json.main.temp - 273.15) * 1.80 + 32);
             $("#pressure").html(json.main.pressure);
             $("#humidity").html(json.main.humidity);
+            console.log(json);
+
         });
+
+        renderSearchHistory();
     })
 
     // Optional Code for temperature conversion
@@ -38,4 +63,6 @@ $( document ).ready(function() {
         }
         fahrenheit = true;
     });
+
+
 });
