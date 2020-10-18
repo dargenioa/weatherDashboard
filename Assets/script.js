@@ -28,21 +28,51 @@ $( document ).ready(function() {
 
         if ($(this).prev().attr("placeholder") == "City") {
             var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
+            let fiveDay = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + query_param + "&cnt=5&appid=" + appID;
         } else if ($(this).prev().attr("placeholder") == "Zip Code") {
             var weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
+            let fiveDay = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + query_param + "&cnt=5&appid=" + appID;
+
         }
 
-        $.getJSON(weather,function(json){
+        $.ajax({
+            url: weather,
+            method: "GET"
+        }).then(function(json){
             $("#city").html(json.name);
-            $("#main_weather").html(json.weather[0].main);
-            $("#description_weather").html(json.weather[0].description);
+           // $("#main_weather").html(json.weather[0].main);
+           // $("#description_weather").html(json.weather[0].description);
             $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
             $("#temperature").html((json.main.temp - 273.15) * 1.80 + 32);
-            $("#pressure").html(json.main.pressure);
+            $("#wind").html(json.wind.speed);
             $("#humidity").html(json.main.humidity);
+            let lat = json.coord.lat;
+            let lon = json.coord.lon;
             console.log(json);
 
+        let uvIndex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + appID;
+
+        $.ajax({
+            url: uvIndex,
+            method: "GET"
+        }).then(function(response){
+            $("#uv-index").html(response.value);
+            console.log(response);
         });
+
+        $.ajax({
+            url: fiveDay,
+            method: "GET"
+        }).then(function(response){
+            console.log(response);
+
+        });
+
+
+
+
+        });
+
 
         renderSearchHistory();
     })
