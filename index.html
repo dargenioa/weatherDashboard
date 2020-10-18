@@ -30,9 +30,8 @@
                     <div class="history"></div>
             </div>
             <div class="col-lg-9 col-lg-offset-2">
-                <h2>City: <span id="city"></span></h2>
-                <h2><span id="description_weather"></span></h2>
-                <img id="weather_image" src="">
+                <h2 id="date"></h2>
+                <h2>City: <span id="city"></span></h2> <img id="weather_image" src="">
                 <h2>Temperature: <span id="temperature"></span></h2>
                 <h2>Wind Speed: <span id="wind"></span></h2>
                 <h2>Humidity: <span id="humidity"></span></h2>
@@ -42,6 +41,13 @@
             </div>
         </div>
     </div>
+    <div class="card">
+        <div class="card-body">
+                <h3>Five day Forecast</h3>
+            <div id="five-day" ></div>
+        </div>
+        </div>
+      </div>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
         integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"
@@ -53,6 +59,7 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./Assets/script.js"></script>
 
 </body>

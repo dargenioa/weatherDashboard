@@ -1,26 +1,30 @@
 $( document ).ready(function() {
     
     let searchCity = $("#search-city");
-    let searchZipcode = $("search-zipcode");
-    let searchHistoryEl = $("search-history");
+    let searchZipcode = $("#search-zipcode");
+    let searchHistoryEl = $("#search-history");
     let historyArr = [];
     
     var appID = "cac4580de451da1962896497423d0dd0";
 
-    function renderSearchHistory () {
+     function renderSearchHistory () {
             $(".history").empty();
 
             for (let i = 0; i < historyArr.length; i++) {
               let newBtn  = $("<button>").text(historyArr[i]);
               let newDiv = $("<div>");
+              newBtn.attr("class", "history-btn");
               newDiv.append(newBtn);
               $(".history").prepend(newDiv);
+              $("input").val('');
 
             }
+
           };
 
 
-    $(".query_btn").click(function(){
+
+    function runQuery (){
 
         var query_param = $(this).prev().val();
         historyArr.push(query_param);
@@ -28,10 +32,8 @@ $( document ).ready(function() {
 
         if ($(this).prev().attr("placeholder") == "City") {
             var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
-            let fiveDay = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + query_param + "&cnt=5&appid=" + appID;
         } else if ($(this).prev().attr("placeholder") == "Zip Code") {
             var weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
-            let fiveDay = "http://api.openweathermap.org/data/2.5/forecast/daily?q=" + query_param + "&cnt=5&appid=" + appID;
 
         }
 
@@ -39,11 +41,12 @@ $( document ).ready(function() {
             url: weather,
             method: "GET"
         }).then(function(json){
+            $("#date").html(moment().format("dddd, " + "MMMM Do YYYY"));
             $("#city").html(json.name);
            // $("#main_weather").html(json.weather[0].main);
            // $("#description_weather").html(json.weather[0].description);
             $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
-            $("#temperature").html((json.main.temp - 273.15) * 1.80 + 32);
+            $("#temperature").html(Math.floor(json.main.temp - 273.15) * 1.80 + 32);
             $("#wind").html(json.wind.speed);
             $("#humidity").html(json.main.humidity);
             let lat = json.coord.lat;
@@ -60,14 +63,31 @@ $( document ).ready(function() {
             console.log(response);
         });
 
+        let fiveDay = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + "current,minute,hourly,alerts&appid=" + appID;
+
         $.ajax({
             url: fiveDay,
             method: "GET"
-        }).then(function(response){
-            console.log(response);
+        }).then(function(result){
+            console.log(result);
+            let results = result.daily;
+
+           // $("#five-day").text(results);
+           
+
+           for (let i = 0; i < 5; i++){
+               let temp = $("<p>" + "Temp: " + Math.floor((results[i].temp.day - 273.15) * 1.80 + 32) + "<p>");
+               let humidity = $("<p>" + "Humidity: " + results[i].humidity + "<p>")
+              let date = $("<p>" + "Date: "  + "<p>");
+               let icon = $("<img>");
+               icon.attr("src", "http://openweathermap.org/img/w/" + results[i].weather[0].icon + ".png");
+              // day.text(results[i].main.temp, results[i].main.humidity, results[i].weather[0].icon);
+               $("#five-day").append(temp, icon, humidity, date);
+               
+           }
+        
 
         });
-
 
 
 
@@ -75,7 +95,7 @@ $( document ).ready(function() {
 
 
         renderSearchHistory();
-    })
+    };
 
     // Optional Code for temperature conversion
     var fahrenheit = true;
@@ -94,5 +114,9 @@ $( document ).ready(function() {
         fahrenheit = true;
     });
 
-
+    $(".query_btn").on("click", runQuery);
+   $(".history").on("click", function(){
+       let thisEl = $(this).attr("class", "history-btn");
+       console.log(thisEl);
+   });
 });
