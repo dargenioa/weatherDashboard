@@ -3,7 +3,7 @@ $( document ).ready(function() {
     let searchCity = $("#search-city");
     let searchZipcode = $("#search-zipcode");
     let searchHistoryEl = $("#search-history");
-    let historyArr = [];
+    let historyArr = JSON.parse(localStorage.getItem("history")) || [];
     
     var appID = "cac4580de451da1962896497423d0dd0";
 
@@ -14,11 +14,19 @@ $( document ).ready(function() {
               let newBtn  = $("<button>").text(historyArr[i]);
               let newDiv = $("<div>");
               newBtn.attr("class", "history-btn");
+              if (isNaN(historyArr[i]) == true){
+                newBtn.attr("searchType", "City");
+
+              } 
+            
               newDiv.append(newBtn);
               $(".history").prepend(newDiv);
               $("input").val('');
 
             }
+
+            localStorage.setItem("history", JSON.stringify(historyArr));
+            
 
           };
 
@@ -94,8 +102,9 @@ $( document ).ready(function() {
         });
 
 
-        renderSearchHistory();
     };
+
+    renderSearchHistory();
 
     // Optional Code for temperature conversion
     var fahrenheit = true;
@@ -115,8 +124,85 @@ $( document ).ready(function() {
     });
 
     $(".query_btn").on("click", runQuery);
-   $(".history").on("click", function(){
-       let thisEl = $(this).attr("class", "history-btn");
-       console.log(thisEl);
+
+    function runHistoryQuery (historyItem, btnAttr){
+
+        
+
+
+        if (btnAttr == "City") {
+            var weather = "http://api.openweathermap.org/data/2.5/weather?q=" + historyItem + "&APPID=" + appID;
+        } else {
+            var weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + historyItem + "&APPID=" + appID;
+
+        }
+
+        $.ajax({
+            url: weather,
+            method: "GET"
+        }).then(function(json){
+            $("#date").html(moment().format("dddd, " + "MMMM Do YYYY"));
+            $("#city").html(json.name);
+           // $("#main_weather").html(json.weather[0].main);
+           // $("#description_weather").html(json.weather[0].description);
+            $("#weather_image").attr("src", "http://openweathermap.org/img/w/" + json.weather[0].icon + ".png");
+            $("#temperature").html(Math.floor(json.main.temp - 273.15) * 1.80 + 32);
+            $("#wind").html(json.wind.speed);
+            $("#humidity").html(json.main.humidity);
+            let lat = json.coord.lat;
+            let lon = json.coord.lon;
+            console.log(json);
+
+        let uvIndex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + appID;
+
+        $.ajax({
+            url: uvIndex,
+            method: "GET"
+        }).then(function(response){
+            $("#uv-index").html(response.value);
+            console.log(response);
+        });
+
+        let fiveDay = "https://api.openweathermap.org/data/2.5/onecall?lat=" + lat + "&lon=" + lon + "&exclude=" + "current,minute,hourly,alerts&appid=" + appID;
+
+        $.ajax({
+            url: fiveDay,
+            method: "GET"
+        }).then(function(result){
+            console.log(result);
+            let results = result.daily;
+
+           // $("#five-day").text(results);
+           
+
+           for (let i = 0; i < 5; i++){
+               let divHolder = $("<div></div>")
+               let temp = $("<p>" + "Temp: " + Math.floor((results[i].temp.day - 273.15) * 1.80 + 32) + "<p>");
+               let humidity = $("<p>" + "Humidity: " + results[i].humidity + "<p>")
+              let date = $("<p>" + "Date: "  + "<p>");
+               let icon = $("<img>");
+               icon.attr("src", "http://openweathermap.org/img/w/" + results[i].weather[0].icon + ".png");
+              // day.text(results[i].main.temp, results[i].main.humidity, results[i].weather[0].icon);
+
+               $(divHolder).append(temp, icon, humidity, date);
+               $("#five-day").append(divHolder);
+               
+           }
+        
+
+        });
+
+
+
+        });
+
+
+    };
+   $(".history-btn").on("click", function(){
+       let searchItem = $(this).text();
+       let btnAttr = $(this).attr("searchType")
+      
+       console.log(searchItem, btnAttr);
+       runHistoryQuery(searchItem, btnAttr)
    });
 });
