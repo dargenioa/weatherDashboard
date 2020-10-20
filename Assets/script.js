@@ -1,3 +1,7 @@
+// Questions for office hours
+// Fix search history buttons and how to have the last search term displayed in the page
+// 
+
 $(document).ready(function () {
 
     //let searchCity = $("#search-city");
@@ -232,5 +236,6 @@ $(document).ready(function () {
         console.log(searchItem, btnAttr);
         runHistoryQuery(searchItem, btnAttr);
     });
+
 
 });
