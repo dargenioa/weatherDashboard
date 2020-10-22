@@ -59,9 +59,9 @@ $(document).ready(function () {
         var weather;
         // If the button that was clicked is a city set weather to the correct URL else set it to the zipcode URL
         if (query_type === "City") {
-            weather = "http://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
+            weather = "https://api.openweathermap.org/data/2.5/weather?q=" + query_param + "&APPID=" + appID;
         } else {
-            weather = "http://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
+            weather = "https://api.openweathermap.org/data/2.5/weather?zip=" + query_param + "&APPID=" + appID;
         }
 
         // First ajax call
@@ -84,7 +84,7 @@ $(document).ready(function () {
 
             // UV index ajax call
 
-            let uvIndex = "http://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + appID;
+            let uvIndex = "https://api.openweathermap.org/data/2.5/uvi?lat=" + lat + "&lon=" + lon + "&appid=" + appID;
 
             $.ajax({
                 url: uvIndex,
