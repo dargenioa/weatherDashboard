@@ -21,7 +21,7 @@ $(document).ready(function () {
         for (let i = 0; i < historyArr.length; i++) {
             let newBtn = $("<button>").text(historyArr[i]);
             let newDiv = $("<div>");
-            newBtn.addClass("history-btn");
+            newBtn.addClass("history-btn btn btn-outline-secondary btn-lg btn-block");
             if (isNaN(historyArr[i]) == true) {
                 newBtn.attr("searchType", "City");
             }
@@ -92,6 +92,22 @@ $(document).ready(function () {
             }).then(function (response) {
                 $("#uv-index").html(response.value);
                 console.log(response);
+
+                let indexColor = response.value;
+                let indexDiv = $("#uv-index");
+                console.log(indexColor, indexDiv);
+    
+                 if (indexColor <= 2){
+                     indexDiv.attr("style", "background-color: green");
+                 } else if (indexColor > 2 && indexColor <= 5) {
+                    indexDiv.attr("style", "background-color: yellow");
+                 } else if (indexColor > 5 && indexColor < 8) {
+                    indexDiv.attr("style", "background-color: orange"); 
+                 } else if (indexColor >= 8 && indexColor < 11) {
+                    indexDiv.attr("style", "background-color: red");
+                } else {
+                    indexDiv.attr("style", "background-color: pink");
+                };
             });
 
             // Five day forecast ajax call
@@ -149,14 +165,14 @@ $(document).ready(function () {
 
     $("#convertToCelsius").click(function () {
         if (fahrenheit) {
-            $("#temperature").text(((($("#temperature").text() - 32) * 5) / 9));
+            $("#temperature").text(Math.floor(((($("#temperature").text() - 32) * 5) / 9)));
         }
         fahrenheit = false;
     });
 
     $("#convertToFahrenheit").click(function () {
         if (fahrenheit == false) {
-            $("#temperature").text((($("#temperature").text() * (9 / 5)) + 32));
+            $("#temperature").text(Math.floor((($("#temperature").text() * (9 / 5)) + 32)));
         }
         fahrenheit = true;
     });

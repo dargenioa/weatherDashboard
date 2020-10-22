@@ -24,25 +24,27 @@
         <div class="row">
             <div id="search-history" class="col-lg-3 col-lg-offset-2">
                 <input type="text" placeholder="City"><button type="button" id="search-city"
-                    class="query_btn btn btn-default btn-sm">Search</button><br>
+                    class="query_btn btn btn-outline-primary btn-sm">Search</button></input><br>
                 <input type="text" placeholder="Zip Code"><button type="button" id="search-zipcode"
-                    class="query_btn btn btn-default btn-sm">Search</button><br>
+                    class="query_btn btn btn-outline-primary btn-sm">Search</button><br>
+                    <br>
+                    <hr>
                     <div class="history"></div>
             </div>
-            <div class="col-lg-9 col-lg-offset-2">
+            <div id="weather" class="col-lg-9 col-lg-offset-2">
                 <h2 id="date"></h2>
                 <h2>City: <span id="city"></span></h2> <img id="weather_image" src="">
-                <h2>Temperature: <span id="temperature"></span></h2>
-                <h2>Wind Speed: <span id="wind"></span></h2>
+                <h2>Temperature:    <span id="temperature"></span></h2>
+                <h2>Wind Speed:  <span id="wind"></span></h2>
                 <h2>Humidity: <span id="humidity"></span></h2>
                 <h2>UV Index: <span id="uv-index"></span></h2>
-                <button id="convertToFahrenheit">Convert to Fahrenheit</button>
-                <button id="convertToCelsius">Convert to Celcius</button>
+                <button id="convertToFahrenheit" class="btn btn-outline-primary btn-sm" type="button">Convert to Fahrenheit</button>
+                <button id="convertToCelsius" class="btn btn-outline-primary btn-sm" type="button">Convert to Celcius</button>
             </div>
         </div>
     </div>
     <section class="five-forecast card-body">
-        <header><h3>Five day Forecast</h3></header>
+        <header><h3 id="five">Five Day Forecast</h3></header>
             </div>
             <div id="five-day" class="row"></div>
         </div>
