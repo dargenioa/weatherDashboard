@@ -1,7 +1,3 @@
-// Questions for office hours
-// Fix search history buttons and how to have the last search term displayed in the page
-// 
-
 $(document).ready(function () {
 
     // Get search history and save to localstorage
