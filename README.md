@@ -30,14 +30,14 @@ This weather application allows user to retrieve weather data either by City or 
 
 * After it is entered the weather and the five day forecast will appear.
 
-<img src="homework/week-6/weatherDashboard/Assets/weatherapp1.png" alt="weather">
+<img src="./Assets/weatherapp1.png" alt="weather">
 
  
-<img src="homework/week-6/weatherDashboard/Assets/weatheapp2.png" alt="fiveday">
+<img src="./Assets/weatheapp2.png" alt="fiveday">
 
 * The application will save the search history that was rendered and save the last search to render to the page when it is reloaded.
 
-<img src="homework/week-6/weatherDashboard/Assets/weatherapp3.png" alt="searchrendered">
+<img src="./Assets/weatherapp3.png" alt="searchrendered">
 
 #### Link to page
 
