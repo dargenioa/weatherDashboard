@@ -24,7 +24,7 @@ This weather application allows user to retrieve weather data either by City or 
 
 ### How to Use
 
-<img src="homework/week-6/weatherDashboard/Assets/weatherapp4.png" alt="getstarted">
+<img src="./Assets/weatherapp4.png" alt="getstarted">
 
 * The user first enters either a city or zipcode.
 
