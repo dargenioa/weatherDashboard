@@ -48,7 +48,7 @@ $(document).ready(function () {
 
         var query_type = $(this).prev().attr("placeholder");
 
-        runQuery(query_param, query_type)
+        runQuery(query_param, query_type);
     }
 
     function runQuery(query_param, query_type) {
@@ -150,6 +150,8 @@ $(document).ready(function () {
     // This keeps them rendered to the page
     renderSearchHistory();
 
+
+    //This keeps the last search item rendered to the page
     var last = historyArr.length - 1;
     var query_type = "zip";
     if (isNaN(historyArr[last])) {
