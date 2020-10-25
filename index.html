@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
-     <link rel="stylesheet" href="./Assets/style.css">
+    <link rel="stylesheet" href="./Assets/style.css">
 
 </head>
 
@@ -24,32 +24,38 @@
         <div class="row">
             <div id="search-history" class="col-lg-3 col-lg-offset-2">
                 <input type="text" placeholder="City"><button type="button" id="search-city"
-                    class="query_btn btn btn-outline-primary btn-sm">Search</button></input><br>
+                    class="query_btn btn">Search</button></input><br>
                 <input type="text" placeholder="Zip Code"><button type="button" id="search-zipcode"
-                    class="query_btn btn btn-outline-primary btn-sm">Search</button><br>
-                    <br>
-                    <hr>
-                    <div class="history"></div>
+                    class="query_btn btn">Search</button><br>
+                <br>
+                <hr>
+                <div class="history"></div>
             </div>
-            <div id="weather" class="col-lg-9 col-lg-offset-2">
+            <div id="weather" class="col-lg-9 col-lg-offset-2 card">
+                <div class="card-body"></div>
                 <h2 id="date"></h2>
                 <h2>City: <span id="city"></span></h2> <img id="weather_image" src="">
-                <h2>Temperature:    <span id="temperature"></span></h2>
-                <h2>Wind Speed:  <span id="wind"></span></h2>
+                <h2>Temperature: <span id="temperature"></span></h2>
+                <h2>Wind Speed: <span id="wind"></span></h2>
                 <h2>Humidity: <span id="humidity"></span></h2>
                 <h2>UV Index: <span id="uv-index"></span></h2>
-                <button id="convertToFahrenheit" class="btn btn-outline-primary btn-sm" type="button">Convert to Fahrenheit</button>
-                <button id="convertToCelsius" class="btn btn-outline-primary btn-sm" type="button">Convert to Celcius</button>
+                <button id="convertToFahrenheit" class="btn btn-outline-primary btn-sm" type="button">Convert to
+                    Fahrenheit</button>
+                <button id="convertToCelsius" class="btn btn-outline-primary btn-sm" type="button">Convert to
+                    Celcius</button>
             </div>
         </div>
     </div>
+    </div>
     <section class="five-forecast card-body">
-        <header><h3 id="five">Five Day Forecast</h3></header>
-            </div>
-            <div id="five-day" class="row"></div>
+        <header>
+            <h2 id="five">Five Day Forecast</h2>
+        </header>
+        </div>
+        <div id="five-day" class="row"></div>
         </div>
         </div>
-      </div>
+        </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
@@ -62,7 +68,7 @@
         integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s"
         crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
     <script src="./Assets/script.js"></script>
 
 </body>

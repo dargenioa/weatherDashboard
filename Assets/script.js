@@ -92,17 +92,17 @@ $(document).ready(function () {
                 let indexColor = response.value;
                 let indexDiv = $("#uv-index");
                 console.log(indexColor, indexDiv);
-    
-                 if (indexColor <= 2){
-                     indexDiv.attr("style", "background-color: green");
-                 } else if (indexColor > 2 && indexColor <= 5) {
-                    indexDiv.attr("style", "background-color: yellow");
-                 } else if (indexColor > 5 && indexColor < 8) {
-                    indexDiv.attr("style", "background-color: orange"); 
-                 } else if (indexColor >= 8 && indexColor < 11) {
-                    indexDiv.attr("style", "background-color: red");
+
+                if (indexColor <= 2) {
+                    indexDiv.attr("style", "background-color: green; color: white;");
+                } else if (indexColor > 2 && indexColor <= 5) {
+                    indexDiv.attr("style", "background-color: yellow; color: red;");
+                } else if (indexColor > 5 && indexColor < 8) {
+                    indexDiv.attr("style", "background-color: orange; color: white;");
+                } else if (indexColor >= 8 && indexColor < 11) {
+                    indexDiv.attr("style", "background-color: red; color: white; ");
                 } else {
-                    indexDiv.attr("style", "background-color: pink");
+                    indexDiv.attr("style", "background-color: pink; color: white;");
                 };
             });
 
@@ -122,14 +122,16 @@ $(document).ready(function () {
                 $("#five-day").empty();
                 for (let i = 0; i < 5; i++) {
                     let divHolder = $("<div></div>").addClass("col-sm-2");
+                    divHolder.attr("id", "div-holder");
                     // Converts unix date
                     let dateConvert = new Date(results[i].dt * 1000).toDateString();
                     let date = $("<p>" + dateConvert + "<p>");
+                    date.attr("id", "date-five");
                     let temp = $("<p>" + "Temp: " + Math.floor((results[i].temp.day - 273.15) * 1.80 + 32) + "<p>");
                     let humidity = $("<p>" + "Humidity: " + results[i].humidity + "<p>");
                     let icon = $("<img>");
                     icon.attr("src", "http://openweathermap.org/img/w/" + results[i].weather[0].icon + ".png");
-                    $(divHolder).append(temp, icon, humidity, date);
+                    $(divHolder).append(date, temp, icon, humidity);
                     $("#five-day").append(divHolder);
 
                 }
