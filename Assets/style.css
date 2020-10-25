@@ -15,9 +15,13 @@ img {
 
 }
 
-.query_btn, .history-btn {
+.query_btn, .history-btn, #convertToCelsius, #convertToFahrenheit {
     color: white;
     background-color: lightslategray;
+}
+
+#convertToCelsius, #convertToFahrenheit {
+    width: 30%;
 }
 
 body {
